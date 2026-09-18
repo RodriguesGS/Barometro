@@ -1,7 +1,8 @@
 from datetime import date
-from barometro.periods import add_years
 
 import requests
+
+from barometro.periods import add_years
 
 URL_BASE = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.{code}/dados"
 HEADERS = {"User-Agent": "barometro/0.1 (github.com/RodriguesGS/barometro)"}
@@ -38,10 +39,10 @@ def validate_period(start: date, end: date) -> None:
 
 def search_period(code: int, start: date, end: date) -> list[dict[str, str]]:
     """
-        Busca os valores da série entre duas datas, como vieram da API.
+    Busca os valores da série entre duas datas, como vieram da API.
 
-        A API responde 404 quando o período não tem dados. Nesse caso,
-        retorna uma lista vazia.
+    A API responde 404 quando o período não tem dados. Nesse caso,
+    retorna uma lista vazia.
     """
 
     validate_period(start=start, end=end)
@@ -65,7 +66,7 @@ def search_period(code: int, start: date, end: date) -> list[dict[str, str]]:
 if __name__ == "__main__":
     records = search_period(code=1, start=date(2026, 1, 1), end=date(2026, 1, 31))
     print(f"Teste 1 | dólar em janeiro | {len(records)} registros")
-    
+
     try:
         search_last(code=999999999, quantity=5)
         print("Teste 2 | não deu erro")
